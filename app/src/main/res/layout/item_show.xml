@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/img_preview_show"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/preview_img" />
+
+        <TextView
+            android:id="@+id/txt_title_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@id/img_preview_show"
+            android:ellipsize="end"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Titulo de la serie" />
+
+        <TextView
+            android:id="@+id/txt_sumary_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_title_show"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@id/img_preview_show"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textSize="14sp"
+            tools:text="Under the Dome is the story of a small town that is suddenly and inexplicably sealed off from the rest of the world by an enormous transparent dome. The town's inhabitants must deal with surviving the post-apocalyptic conditions while searching for answers about the dome, where it came from and if and when it will go away." />
+
+        <TextView
+            android:id="@+id/txt_genres_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_sumary_show"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@id/img_preview_show"
+            android:textSize="14sp"
+            tools:text="Accion | Aventura" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

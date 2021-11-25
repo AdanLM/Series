@@ -4,8 +4,12 @@ import android.app.Application;
 import android.content.Context;
 
 import com.adanlm.series.BuildConfig;
+import com.adanlm.series.R;
 import com.adanlm.series.data.ShowsRepository;
 import com.adanlm.series.data.remote.EndPoints;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
 
 import javax.inject.Singleton;
 
@@ -43,7 +47,22 @@ public abstract class AppModule {
     }
 
     @Provides
-    static ShowsRepository provideRepository(EndPoints endPoints){
+    static ShowsRepository provideRepository(EndPoints endPoints) {
         return new ShowsRepository(endPoints);
+    }
+
+    @Singleton
+    @Provides
+    static RequestOptions provideRequestOptions() {
+        return RequestOptions
+                .placeholderOf(R.drawable.preview_img)
+                .error(R.drawable.preview_img);
+    }
+
+    @Singleton
+    @Provides
+    static RequestManager provideGlideInstance(Application application, RequestOptions requestOptions) {
+        return Glide.with(application)
+                .setDefaultRequestOptions(requestOptions);
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -19,20 +20,25 @@ public class MainPresenter implements MainContract.Presenter {
 
     private MainContract.View view;
     private final ShowsRepository repository;
-
+    private CompositeDisposable disposable;
 
     public MainPresenter(ShowsRepository repository) {
         this.repository = repository;
+        this.disposable = new CompositeDisposable();
     }
 
     @Override
     public void takeView(MainContract.View view) {
         this.view = view;
+        getAllShows();
     }
 
     @Override
     public void dropView() {
         this.view = null;
+        if (!disposable.isDisposed()) {
+            disposable.clear();
+        }
     }
 
     @Override
@@ -44,11 +50,12 @@ public class MainPresenter implements MainContract.Presenter {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         Log.d(TAG, "onSubscribe: ");
+                        disposable.add(d);
                     }
 
                     @Override
                     public void onSuccess(@NonNull List<Show> shows) {
-                        Log.d(TAG, "onSuccess: ");
+                        view.showAllShows(shows);
                     }
 
                     @Override

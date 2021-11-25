@@ -2,8 +2,11 @@ package com.adanlm.series.ui.main;
 
 import android.os.Bundle;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.adanlm.series.R;
 import com.adanlm.series.data.model.Show;
+import com.adanlm.series.ui.adapters.ShowAdapter;
 
 import java.util.List;
 
@@ -18,19 +21,20 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
     @Inject
     MainContract.Presenter presenter;
 
+    @Inject
+    ShowAdapter adapter;
+
+    private RecyclerView showRecycler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        showRecycler = findViewById(R.id.show_list);
+        showRecycler.setAdapter(adapter);
 
         presenter.takeView(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.getAllShows();
     }
 
     @Override
@@ -41,6 +45,6 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
 
     @Override
     public void showAllShows(List<Show> showsList) {
-
+        adapter.updateData(showsList);
     }
 }
