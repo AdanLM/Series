@@ -1,6 +1,8 @@
 package com.adanlm.series.ui.detailshow;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import com.adanlm.series.R;
 import com.adanlm.series.data.model.Season;
 import com.adanlm.series.data.model.Show;
 import com.adanlm.series.ui.adapters.SeasonAdapter;
+import com.adanlm.series.ui.detailseason.DetailSeasonActivity;
 import com.adanlm.series.utils.CommonUtils;
 import com.bumptech.glide.RequestManager;
 
@@ -20,8 +23,12 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
-public class DetailShowActivity extends DaggerAppCompatActivity implements DetailShowContract.View {
+import static com.adanlm.series.utils.Const.EXTRA_ID_SEASON;
 
+public class DetailShowActivity extends DaggerAppCompatActivity implements DetailShowContract.View, DetailShowContract.OnItemClickListener {
+
+    private static final String TAG = "DetailShowActivity";
+    
     @Inject
     DetailShowContract.Presenter presenter;
 
@@ -50,6 +57,7 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
         imgPreview = findViewById(R.id.img_detail);
         recyclerView = findViewById(R.id.show_list_season);
         recyclerView.setAdapter(adapter);
+        adapter.setListener(this);
 
         presenter.takeView(this);
     }
@@ -80,5 +88,13 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
     @Override
     public void showSeasons(List<Season> seasons) {
         adapter.updateData(seasons);
+    }
+
+    @Override
+    public void onClick(Season season) {
+        Log.d(TAG, "onClick: " + season.getIdSeason());
+        Intent intent = new Intent(DetailShowActivity.this, DetailSeasonActivity.class);
+        intent.putExtra(EXTRA_ID_SEASON, season.getIdSeason());
+        startActivity(intent);
     }
 }

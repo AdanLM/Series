@@ -38,6 +38,7 @@ public class SeasonAdapter extends RecyclerView.Adapter<SeasonAdapter.ViewHolder
     public void onBindViewHolder(@NonNull SeasonAdapter.ViewHolder holder, int position) {
         Season currentSeason = seasonList.get(position);
         holder.getTxtSeason().setText("Temporada " + currentSeason.getNumberSeason());
+        holder.setObjectShow(currentSeason);
     }
 
     @Override

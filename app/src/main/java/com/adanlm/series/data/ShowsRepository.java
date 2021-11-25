@@ -1,5 +1,6 @@
 package com.adanlm.series.data;
 
+import com.adanlm.series.data.model.Episode;
 import com.adanlm.series.data.model.Season;
 import com.adanlm.series.data.model.Show;
 import com.adanlm.series.data.remote.EndPoints;
@@ -22,5 +23,9 @@ public class ShowsRepository {
 
     public Single<List<Season>> getAllSeasonByShow(int idShow) {
         return endPoints.getSeasonByShows(idShow);
+    }
+
+    public Single<List<Episode>> getAllEpisodesBySeason(int idSeason) {
+        return endPoints.getEpisodesBySeason(idSeason);
     }
 }

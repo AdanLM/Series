@@ -1,6 +1,7 @@
 package com.adanlm.series.data.remote;
 
 
+import com.adanlm.series.data.model.Episode;
 import com.adanlm.series.data.model.Season;
 import com.adanlm.series.data.model.Show;
 
@@ -17,4 +18,7 @@ public interface EndPoints {
 
     @GET("shows/{idShow}/seasons")
     Single<List<Season>> getSeasonByShows(@Path("idShow") int idShow);
+
+    @GET("seasons/{idSeason}/episodes")
+    Single<List<Episode>> getEpisodesBySeason(@Path("idSeason") int idSeason);
 }

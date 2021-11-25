@@ -1,13 +1,16 @@
 package com.adanlm.series.data.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Season {
 
     @SerializedName("id")
+    @Expose
     private int idSeason;
 
     @SerializedName("number")
+    @Expose
     private int numberSeason;
 
     public int getIdSeason() {

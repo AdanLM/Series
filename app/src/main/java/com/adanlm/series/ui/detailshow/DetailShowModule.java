@@ -2,8 +2,6 @@ package com.adanlm.series.ui.detailshow;
 
 import com.adanlm.series.data.ShowsRepository;
 import com.adanlm.series.ui.adapters.SeasonAdapter;
-import com.adanlm.series.ui.adapters.ShowAdapter;
-import com.bumptech.glide.RequestManager;
 
 import dagger.Module;
 import dagger.Provides;

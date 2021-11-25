@@ -1,5 +1,7 @@
 package com.adanlm.series.di;
 
+import com.adanlm.series.ui.detailseason.DetailSeasonActivity;
+import com.adanlm.series.ui.detailseason.DetailSeasonModule;
 import com.adanlm.series.ui.detailshow.DetailShowActivity;
 import com.adanlm.series.ui.detailshow.DetailShowModule;
 import com.adanlm.series.ui.main.MainActivity;
@@ -23,4 +25,8 @@ public abstract class ActivityBindingModule {
     @ActivityScoped
     @ContributesAndroidInjector(modules = DetailShowModule.class)
     abstract DetailShowActivity detailShowActivity();
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = DetailSeasonModule.class)
+    abstract DetailSeasonActivity detailSeasonActivity();
 }
