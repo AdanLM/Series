@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adanlm.series.R;
@@ -59,6 +60,9 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
         recyclerView.setAdapter(adapter);
         adapter.setListener(this);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         presenter.takeView(this);
     }
 
@@ -92,9 +96,14 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
 
     @Override
     public void onClick(Season season) {
-        Log.d(TAG, "onClick: " + season.getIdSeason());
         Intent intent = new Intent(DetailShowActivity.this, DetailSeasonActivity.class);
         intent.putExtra(EXTRA_ID_SEASON, season.getIdSeason());
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

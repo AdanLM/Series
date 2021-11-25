@@ -32,6 +32,9 @@ public class DetailSeasonActivity extends DaggerAppCompatActivity implements Det
         recyclerView = findViewById(R.id.show_list_episodes);
         recyclerView.setAdapter(adapter);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         presenter.takeView(this);
     }
 
@@ -55,5 +58,11 @@ public class DetailSeasonActivity extends DaggerAppCompatActivity implements Det
     @Override
     public void setTitleActivity(String title) {
         getSupportActionBar().setTitle(title);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

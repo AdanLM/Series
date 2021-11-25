@@ -15,12 +15,10 @@
         <activity
             android:name=".ui.detailseason.DetailSeasonActivity"
             android:parentActivityName=".ui.detailshow.DetailShowActivity"
-            android:persistent="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.detailshow.DetailShowActivity"
             android:parentActivityName=".ui.main.MainActivity"
-            android:persistent="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.main.MainActivity"
