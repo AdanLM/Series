@@ -123,12 +123,13 @@
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/show_list"
+        android:id="@+id/show_list_season"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/lbl_list_seasons"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
+        tools:listitem="@layout/item_season"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 

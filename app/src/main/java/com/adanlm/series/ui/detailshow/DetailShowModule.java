@@ -1,6 +1,9 @@
 package com.adanlm.series.ui.detailshow;
 
 import com.adanlm.series.data.ShowsRepository;
+import com.adanlm.series.ui.adapters.SeasonAdapter;
+import com.adanlm.series.ui.adapters.ShowAdapter;
+import com.bumptech.glide.RequestManager;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,5 +21,10 @@ public class DetailShowModule {
     @Provides
     static String provideJsonString(DetailShowActivity activity) {
         return activity.getIntent().getStringExtra(EXTRA_SHOW_STRING);
+    }
+
+    @Provides
+    static SeasonAdapter provideAdapter() {
+        return new SeasonAdapter();
     }
 }

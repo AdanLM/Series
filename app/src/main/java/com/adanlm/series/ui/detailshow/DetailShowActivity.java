@@ -5,10 +5,16 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.adanlm.series.R;
+import com.adanlm.series.data.model.Season;
 import com.adanlm.series.data.model.Show;
+import com.adanlm.series.ui.adapters.SeasonAdapter;
 import com.adanlm.series.utils.CommonUtils;
 import com.bumptech.glide.RequestManager;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -22,9 +28,13 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
     @Inject
     RequestManager glide;
 
+    @Inject
+    SeasonAdapter adapter;
+
     private TextView txtSummary, txtGenres, txtPremieredDate, txtOfficialSite, txtRating;
     private RatingBar rbarRating;
     private ImageView imgPreview;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +48,8 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
         txtRating = findViewById(R.id.txt_detail_rating);
         rbarRating = findViewById(R.id.rbar_detail_rating);
         imgPreview = findViewById(R.id.img_detail);
+        recyclerView = findViewById(R.id.show_list_season);
+        recyclerView.setAdapter(adapter);
 
         presenter.takeView(this);
     }
@@ -63,5 +75,10 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
     @Override
     public void setTitleActivity(String title) {
         getSupportActionBar().setTitle(title);
+    }
+
+    @Override
+    public void showSeasons(List<Season> seasons) {
+        adapter.updateData(seasons);
     }
 }

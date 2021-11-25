@@ -63,7 +63,7 @@ public class MainPresenter implements MainContract.Presenter {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d(TAG, "onError: ");
+                        Log.d(TAG, "onError: " + e.getMessage());
                     }
                 });
     }
