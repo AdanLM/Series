@@ -17,6 +17,8 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
+import static com.adanlm.series.utils.Const.EXTRA_SHOW_STRING;
+
 public class MainActivity extends DaggerAppCompatActivity implements MainContract.View, MainContract.OnItemClickListener {
 
     private static final String TAG = "MainActivity";
@@ -55,7 +57,7 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
     public void onClick(Show show) {
         String jsonShow = new Gson().toJson(show);
         Intent intent = new Intent(MainActivity.this, DetailShowActivity.class);
-        intent.putExtra("jsonShow", jsonShow);
+        intent.putExtra(EXTRA_SHOW_STRING, jsonShow);
         startActivity(intent);
     }
 }

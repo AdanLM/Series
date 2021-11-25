@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.adanlm.series.R;
 import com.adanlm.series.data.model.Show;
 import com.adanlm.series.ui.main.MainContract;
+import com.adanlm.series.utils.CommonUtils;
 import com.bumptech.glide.RequestManager;
 
 import java.util.ArrayList;
@@ -41,11 +42,11 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Show currentShow = showList.get(position);
-        String summary = currentShow.getSummary().replaceAll("\\<.*?\\>", "");
+        String summary = CommonUtils.cleanHTMLText(currentShow.getSummary());
 
         holder.getTxtTitle().setText(currentShow.getTitle());
         holder.getTxtSummary().setText(summary);
-        holder.getTxtGenres().setText(currentShow.getGenres().toString());
+        holder.getTxtGenres().setText(CommonUtils.cleanBracketsText(currentShow.getGenres().toString()));
         glide.load(currentShow.getImage().getOriginal())
                 .into(holder.getImgPreview());
         holder.setObjectShow(currentShow);
@@ -56,7 +57,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void setListener(MainContract.OnItemClickListener listener){
+    public void setListener(MainContract.OnItemClickListener listener) {
         this.listener = listener;
     }
 

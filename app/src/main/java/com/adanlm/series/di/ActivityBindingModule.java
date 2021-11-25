@@ -21,6 +21,6 @@ public abstract class ActivityBindingModule {
     abstract MainActivity mainActivity();
 
     @ActivityScoped
-    @ContributesAndroidInjector()
+    @ContributesAndroidInjector(modules = DetailShowModule.class)
     abstract DetailShowActivity detailShowActivity();
 }
