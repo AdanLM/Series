@@ -1,6 +1,7 @@
 package com.adanlm.series.di;
 
 import com.adanlm.series.ui.main.MainActivity;
+import com.adanlm.series.ui.main.MainModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -13,6 +14,7 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivityBindingModule {
 
-    @ContributesAndroidInjector
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = MainModule.class)
     abstract MainActivity mainActivity();
 }

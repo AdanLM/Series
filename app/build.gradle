@@ -20,6 +20,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", "\"https://api.tvmaze.com/\""
+        }
+        debug{
+            buildConfigField "String", "BASE_URL", "\"https://api.tvmaze.com/\""
         }
     }
     compileOptions {
@@ -30,6 +34,8 @@ android {
 
 ext{
     dagger_version = "2.35.1"
+    retrofit_version = "2.9.0"
+    rxAndroid_version = "2.1.1"
 }
 
 dependencies {
@@ -47,4 +53,10 @@ dependencies {
     implementation "com.google.dagger:dagger-android:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    //RxAndroid
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroid_version"
 }
