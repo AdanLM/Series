@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adanlm.series.R;
 import com.adanlm.series.data.model.Show;
-import com.bumptech.glide.Glide;
+import com.adanlm.series.ui.main.MainContract;
 import com.bumptech.glide.RequestManager;
 
 import java.util.ArrayList;
@@ -23,8 +23,10 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
     private static final String TAG = "ShowAdapter";
     private List<Show> showList = new ArrayList<>();
-    private RequestManager glide;
+    private final RequestManager glide;
+    private MainContract.OnItemClickListener listener;
 
+    @Inject
     public ShowAdapter(RequestManager glide) {
         this.glide = glide;
     }
@@ -33,7 +35,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_show, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, listener);
     }
 
     @Override
@@ -46,6 +48,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         holder.getTxtGenres().setText(currentShow.getGenres().toString());
         glide.load(currentShow.getImage().getOriginal())
                 .into(holder.getImgPreview());
+        holder.setObjectShow(currentShow);
     }
 
     public void updateData(List<Show> showList) {
@@ -53,22 +56,34 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void setListener(MainContract.OnItemClickListener listener){
+        this.listener = listener;
+    }
+
     @Override
     public int getItemCount() {
         return showList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView imgPreview;
         private TextView txtTitle, txtSummary, txtGenres;
+        private MainContract.OnItemClickListener listener;
+        private Show currentShow;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, MainContract.OnItemClickListener listener) {
             super(itemView);
             imgPreview = itemView.findViewById(R.id.img_preview_show);
             txtTitle = itemView.findViewById(R.id.txt_title_show);
             txtSummary = itemView.findViewById(R.id.txt_sumary_show);
             txtGenres = itemView.findViewById(R.id.txt_genres_show);
+            itemView.setOnClickListener(this);
+            this.listener = listener;
+        }
+
+        public void setObjectShow(Show currentShow) {
+            this.currentShow = currentShow;
         }
 
         public ImageView getImgPreview() {
@@ -85,6 +100,11 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
         public TextView getTxtGenres() {
             return txtGenres;
+        }
+
+        @Override
+        public void onClick(View view) {
+            this.listener.onClick(currentShow);
         }
     }
 }

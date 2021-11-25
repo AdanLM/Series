@@ -25,12 +25,27 @@ public class Show {
     @Expose
     private Image image;
 
-    public Show(int idShow, String title, String summary, List<String> genres, Image image) {
+    @SerializedName("premiered")
+    @Expose
+    private String premiered;
+
+    @SerializedName("officialSite")
+    @Expose
+    private String officialSite;
+
+    @SerializedName("rating")
+    @Expose
+    private Rating rating;
+
+    public Show(int idShow, String title, String summary, List<String> genres, Image image, String premiered, String officialSite, Rating rating) {
         this.idShow = idShow;
         this.title = title;
         this.summary = summary;
         this.genres = genres;
         this.image = image;
+        this.premiered = premiered;
+        this.officialSite = officialSite;
+        this.rating = rating;
     }
 
     public Show() {
@@ -54,5 +69,17 @@ public class Show {
 
     public Image getImage() {
         return image;
+    }
+
+    public String getPremiered() {
+        return premiered;
+    }
+
+    public String getOfficialSite() {
+        return officialSite;
+    }
+
+    public float getRating() {
+        return rating.getAverage();
     }
 }

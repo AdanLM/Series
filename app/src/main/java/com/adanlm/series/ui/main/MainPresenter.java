@@ -7,6 +7,8 @@ import com.adanlm.series.data.model.Show;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -22,6 +24,7 @@ public class MainPresenter implements MainContract.Presenter {
     private final ShowsRepository repository;
     private CompositeDisposable disposable;
 
+    @Inject
     public MainPresenter(ShowsRepository repository) {
         this.repository = repository;
         this.disposable = new CompositeDisposable();

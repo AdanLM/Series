@@ -18,4 +18,8 @@ public interface MainContract {
 
         void getAllShows();
     }
+
+    interface OnItemClickListener {
+        void onClick(Show show);
+    }
 }
