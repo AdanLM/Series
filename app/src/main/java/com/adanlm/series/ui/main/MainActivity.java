@@ -1,10 +1,12 @@
-package com.adanlm.series;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.adanlm.series.ui.main;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.adanlm.series.R;
+
+import dagger.android.support.DaggerAppCompatActivity;
+
+public class MainActivity extends DaggerAppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
