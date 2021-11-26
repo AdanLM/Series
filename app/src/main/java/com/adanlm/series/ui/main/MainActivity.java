@@ -2,7 +2,10 @@ package com.adanlm.series.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adanlm.series.R;
@@ -19,7 +22,7 @@ import dagger.android.support.DaggerAppCompatActivity;
 
 import static com.adanlm.series.utils.Const.EXTRA_SHOW_STRING;
 
-public class MainActivity extends DaggerAppCompatActivity implements MainContract.View, MainContract.OnItemClickListener {
+public class MainActivity extends DaggerAppCompatActivity implements MainContract.View, MainContract.OnItemClickListener, SearchView.OnQueryTextListener {
 
     private static final String TAG = "MainActivity";
 
@@ -59,5 +62,26 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
         Intent intent = new Intent(MainActivity.this, DetailShowActivity.class);
         intent.putExtra(EXTRA_SHOW_STRING, jsonShow);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) item.getActionView();
+        searchView.setOnQueryTextListener(this);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String searchString) {
+        adapter.getFilter().filter(searchString);
+        return false;
     }
 }

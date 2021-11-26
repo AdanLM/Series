@@ -3,6 +3,8 @@ package com.adanlm.series.ui.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,10 +22,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
+public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = "ShowAdapter";
     private List<Show> showList = new ArrayList<>();
+    private List<Show> showListAll = new ArrayList<>();
     private final RequestManager glide;
     private MainContract.OnItemClickListener listener;
 
@@ -54,6 +57,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
 
     public void updateData(List<Show> showList) {
         this.showList = showList;
+        this.showListAll = new ArrayList<>(showList);
         notifyDataSetChanged();
     }
 
@@ -65,6 +69,43 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ViewHolder> {
     public int getItemCount() {
         return showList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    /*
+        Esta funcion nos sirve para poder filtrar los elementos de nuestro ArrayList
+     */
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<Show> filteredList = new ArrayList<>();
+            //Convertimos nuestra palabra a string y a minusculas para que la busquedad sea lo mas exacta posible
+            String searchString = charSequence.toString().toLowerCase();
+            if (searchString.isEmpty()) {
+                filteredList.addAll(showListAll);
+            } else {
+                for (Show show : showListAll) {
+                    if (show.getTitle().toLowerCase().contains(searchString)) {
+                        filteredList.add(show);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            showList.clear();
+            showList.addAll((List<Show>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
