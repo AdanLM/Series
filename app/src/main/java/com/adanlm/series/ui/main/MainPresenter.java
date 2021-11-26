@@ -59,6 +59,7 @@ public class MainPresenter implements MainContract.Presenter {
                     @Override
                     public void onSuccess(@NonNull List<Show> shows) {
                         view.showAllShows(shows);
+                        repository.insertAllShow(shows);
                     }
 
                     @Override

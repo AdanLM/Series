@@ -1,12 +1,18 @@
 package com.adanlm.series.data.model;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@Entity(tableName = "shows")
 public class Show {
 
+    @PrimaryKey
     @SerializedName("id")
     @Expose
     private int idShow;
@@ -48,6 +54,7 @@ public class Show {
         this.rating = rating;
     }
 
+    @Ignore
     public Show() {
     }
 
@@ -79,7 +86,7 @@ public class Show {
         return officialSite;
     }
 
-    public float getRating() {
-        return rating.getAverage();
+    public Rating getRating() {
+        return rating;
     }
 }

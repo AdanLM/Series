@@ -21,9 +21,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "BASE_URL", "\"https://api.tvmaze.com/\""
+            buildConfigField "String", "DATABASE_NAME", "\"${defaultConfig.applicationId}.dbexpenses\""
+            buildConfigField "int", "DATABASE_VERSION", "1"
         }
         debug{
             buildConfigField "String", "BASE_URL", "\"https://api.tvmaze.com/\""
+            buildConfigField "String", "DATABASE_NAME", "\"${defaultConfig.applicationId}.dbexpenses\""
+            buildConfigField "int", "DATABASE_VERSION", "1"
         }
     }
     compileOptions {
@@ -37,6 +41,7 @@ ext{
     retrofit_version = "2.9.0"
     rxAndroid_version = "2.1.1"
     glide_version = "4.12.0"
+    room_version = "2.3.0"
 }
 
 dependencies {
@@ -63,4 +68,8 @@ dependencies {
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    //Room (Data persistence)
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
 }

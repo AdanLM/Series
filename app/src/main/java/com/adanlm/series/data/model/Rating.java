@@ -9,6 +9,10 @@ public class Rating {
     @Expose
     private float average;
 
+    public Rating(float average) {
+        this.average = average;
+    }
+
     public float getAverage() {
         return average;
     }

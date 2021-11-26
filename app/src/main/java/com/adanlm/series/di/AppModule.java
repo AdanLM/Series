@@ -3,9 +3,12 @@ package com.adanlm.series.di;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.room.Room;
+
 import com.adanlm.series.BuildConfig;
 import com.adanlm.series.R;
 import com.adanlm.series.data.ShowsRepository;
+import com.adanlm.series.data.local.ControlDataBase;
 import com.adanlm.series.data.remote.EndPoints;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -47,8 +50,8 @@ public abstract class AppModule {
     }
 
     @Provides
-    static ShowsRepository provideRepository(EndPoints endPoints) {
-        return new ShowsRepository(endPoints);
+    static ShowsRepository provideRepository(EndPoints endPoints, ControlDataBase db) {
+        return new ShowsRepository(endPoints, db);
     }
 
     @Singleton
@@ -64,5 +67,11 @@ public abstract class AppModule {
     static RequestManager provideGlideInstance(Application application, RequestOptions requestOptions) {
         return Glide.with(application)
                 .setDefaultRequestOptions(requestOptions);
+    }
+
+    @Singleton
+    @Provides
+    static ControlDataBase provideControlDataBase(Application application) {
+        return Room.databaseBuilder(application, ControlDataBase.class, BuildConfig.DATABASE_NAME).build();
     }
 }

@@ -12,6 +12,11 @@ public class Image {
     @Expose
     private String original;
 
+    public Image(String medium, String original) {
+        this.medium = medium;
+        this.original = original;
+    }
+
     public String getMedium() {
         return medium;
     }

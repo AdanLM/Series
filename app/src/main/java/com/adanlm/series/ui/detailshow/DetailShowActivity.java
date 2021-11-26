@@ -2,12 +2,10 @@ package com.adanlm.series.ui.detailshow;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adanlm.series.R;
@@ -29,7 +27,7 @@ import static com.adanlm.series.utils.Const.EXTRA_ID_SEASON;
 public class DetailShowActivity extends DaggerAppCompatActivity implements DetailShowContract.View, DetailShowContract.OnItemClickListener {
 
     private static final String TAG = "DetailShowActivity";
-    
+
     @Inject
     DetailShowContract.Presenter presenter;
 
@@ -80,7 +78,7 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
         txtPremieredDate.setText(show.getPremiered());
         txtOfficialSite.setText(show.getOfficialSite());
         txtRating.setText(String.valueOf(show.getRating()));
-        rbarRating.setRating(show.getRating());
+        rbarRating.setRating(show.getRating().getAverage());
         glide.load(show.getImage().getOriginal()).into(imgPreview);
     }
 
