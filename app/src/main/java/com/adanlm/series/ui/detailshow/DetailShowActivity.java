@@ -46,7 +46,6 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
     private ImageView imgPreview;
     private RecyclerView recyclerView;
     private RelativeLayout linearLayout;
-    private CircularProgressIndicator progressIndicator;
     private TextView emptyView;
 
     @Override
@@ -64,7 +63,6 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
         recyclerView = findViewById(R.id.show_list_season);
         linearLayout = findViewById(R.id.linear_detail_show);
 
-        progressIndicator = findViewById(R.id.progress_detail_shows);
         emptyView = findViewById(R.id.empty_view_detail_show);
 
         recyclerView.setAdapter(adapter);
@@ -88,7 +86,6 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
         if (!CommonUtils.isNetworkAvailable(this)) {
             showSnackDontInternet();
         }
-        presenter.getAllSeasonsByShow();
     }
 
     @Override
@@ -134,17 +131,6 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }
-
-    @Override
-    public void showProgress() {
-        progressIndicator.setVisibility(View.VISIBLE);
-
-    }
-
-    @Override
-    public void hideProgress() {
-        progressIndicator.setVisibility(View.GONE);
     }
 
     @Override

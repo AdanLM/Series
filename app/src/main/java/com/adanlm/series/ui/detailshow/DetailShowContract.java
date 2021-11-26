@@ -14,10 +14,6 @@ public interface DetailShowContract {
 
         void showSeasons(List<Season> seasons);
 
-        void showProgress();
-
-        void hideProgress();
-
         void showEmptyView();
     }
 

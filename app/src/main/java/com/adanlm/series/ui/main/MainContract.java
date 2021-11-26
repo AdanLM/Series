@@ -8,8 +8,6 @@ public interface MainContract {
 
     interface View {
         void showAllShows(List<Show> showsList);
-        void showProgress();
-        void hideProgress();
         void showEmptyView();
     }
 

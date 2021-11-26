@@ -33,6 +33,7 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void takeView(MainContract.View view) {
         this.view = view;
+        getAllShows();
     }
 
     @Override
@@ -45,7 +46,6 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void getAllShows() {
-        view.showProgress();
         repository.getAllShows()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -58,7 +58,6 @@ public class MainPresenter implements MainContract.Presenter {
 
                     @Override
                     public void onSuccess(@NonNull List<Show> shows) {
-                        view.hideProgress();
                         if (shows.size() > 0) {
                             view.showAllShows(shows);
                             repository.insertAllShow(shows);
@@ -70,7 +69,6 @@ public class MainPresenter implements MainContract.Presenter {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Log.d(TAG, "onError: " + e.getMessage());
-                        view.hideProgress();
                         view.showEmptyView();
                     }
                 });

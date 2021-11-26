@@ -40,7 +40,6 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
 
     private RecyclerView showRecycler;
     private LinearLayout linearLayout;
-    private CircularProgressIndicator progressIndicator;
     private TextView emptyView;
 
     @Override
@@ -51,7 +50,6 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
         showRecycler = findViewById(R.id.show_list);
         showRecycler.setAdapter(adapter);
         linearLayout = findViewById(R.id.linear_main);
-        progressIndicator = findViewById(R.id.progress_shows);
         emptyView = findViewById(R.id.empty_view_show);
 
         adapter.setListener(this);
@@ -64,7 +62,6 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
         if (!CommonUtils.isNetworkAvailable(this)) {
             showSnackDontInternet();
         }
-        presenter.getAllShows();
     }
 
     @Override
@@ -79,17 +76,6 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
         showRecycler.setVisibility(View.VISIBLE);
         adapter.updateData(showsList);
 
-    }
-
-    @Override
-    public void showProgress() {
-        progressIndicator.setVisibility(View.VISIBLE);
-
-    }
-
-    @Override
-    public void hideProgress() {
-        progressIndicator.setVisibility(View.GONE);
     }
 
     @Override

@@ -31,7 +31,6 @@ public class DetailSeasonActivity extends DaggerAppCompatActivity implements Det
     private RecyclerView recyclerView;
 
     private LinearLayout linearLayout;
-    private CircularProgressIndicator progressIndicator;
     private TextView emptyView;
 
     @Override
@@ -43,7 +42,6 @@ public class DetailSeasonActivity extends DaggerAppCompatActivity implements Det
         recyclerView.setAdapter(adapter);
 
         linearLayout = findViewById(R.id.linear_detail_season);
-        progressIndicator = findViewById(R.id.progress_season);
         emptyView = findViewById(R.id.empty_view_season);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,17 +89,6 @@ public class DetailSeasonActivity extends DaggerAppCompatActivity implements Det
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }
-
-    @Override
-    public void showProgress() {
-        progressIndicator.setVisibility(View.VISIBLE);
-
-    }
-
-    @Override
-    public void hideProgress() {
-        progressIndicator.setVisibility(View.GONE);
     }
 
     @Override

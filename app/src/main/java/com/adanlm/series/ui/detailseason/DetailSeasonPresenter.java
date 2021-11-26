@@ -45,7 +45,6 @@ public class DetailSeasonPresenter implements DetailSeasonContract.Presenter {
 
     @Override
     public void getAllEpisodesBySeason() {
-        view.showProgress();
         repository.getAllEpisodesBySeason(idSeason)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -58,7 +57,6 @@ public class DetailSeasonPresenter implements DetailSeasonContract.Presenter {
 
                     @Override
                     public void onSuccess(@NonNull List<Episode> episodeList) {
-                        view.hideProgress();
                         if (episodeList.size() > 0) {
                             view.showEpisodes(episodeList);
                             view.setTitleActivity("Temporada " + idSeason);
@@ -71,7 +69,6 @@ public class DetailSeasonPresenter implements DetailSeasonContract.Presenter {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Log.d(TAG, "onError: ");
-                        view.showProgress();
                         view.showEmptyView();
                     }
                 });

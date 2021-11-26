@@ -11,10 +11,6 @@ public interface DetailSeasonContract {
 
         void setTitleActivity(String title);
 
-        void showProgress();
-
-        void hideProgress();
-
         void showEmptyView();
     }
 

@@ -20,13 +20,6 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_episode" />
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progress_season"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:indeterminate="true" />
-
     <TextView
         android:id="@+id/empty_view_season"
         android:layout_width="wrap_content"
