@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Series</string>
+    <string name="error_connection">No hay conexión a internet.</string>
 </resources>

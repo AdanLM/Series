@@ -20,6 +20,8 @@ public interface DetailShowContract {
 
         void dropView();
 
+        void getAllSeasonsByShow();
+
     }
 
     interface OnItemClickListener {

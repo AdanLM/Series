@@ -42,11 +42,11 @@ public class DetailShowPresenter implements DetailShowContract.Presenter {
         if (showDetail != null) {
             view.showDetailShow(showDetail);
             view.setTitleActivity(showDetail.getTitle());
-            getAllSeasonsByShow();
         }
     }
 
-    private void getAllSeasonsByShow() {
+    @Override
+    public void getAllSeasonsByShow() {
         repository.getAllSeasonByShow(showDetail.getIdShow())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

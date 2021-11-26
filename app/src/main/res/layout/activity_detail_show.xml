@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
+    android:id="@+id/linear_detail_show"
     tools:context=".ui.detailshow.DetailShowActivity">
 
     <ImageView

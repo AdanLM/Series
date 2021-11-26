@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.adanlm.series.ui.adapters.SeasonAdapter;
 import com.adanlm.series.ui.detailseason.DetailSeasonActivity;
 import com.adanlm.series.utils.CommonUtils;
 import com.bumptech.glide.RequestManager;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -41,6 +43,7 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
     private RatingBar rbarRating;
     private ImageView imgPreview;
     private RecyclerView recyclerView;
+    private RelativeLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
         rbarRating = findViewById(R.id.rbar_detail_rating);
         imgPreview = findViewById(R.id.img_detail);
         recyclerView = findViewById(R.id.show_list_season);
+        linearLayout = findViewById(R.id.linear_detail_show);
         recyclerView.setAdapter(adapter);
         adapter.setListener(this);
 
@@ -68,6 +72,15 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
     protected void onPause() {
         super.onPause();
         presenter.dropView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!CommonUtils.isNetworkAvailable(this)) {
+            showSnackDontInternet();
+        }
+        presenter.getAllSeasonsByShow();
     }
 
     @Override
@@ -90,6 +103,14 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
     @Override
     public void showSeasons(List<Season> seasons) {
         adapter.updateData(seasons);
+    }
+
+    private void showSnackDontInternet() {
+        Snackbar snackbar = Snackbar.make(linearLayout, R.string.error_connection, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction("X", view -> {
+            snackbar.dismiss();
+        });
+        snackbar.show();
     }
 
     @Override

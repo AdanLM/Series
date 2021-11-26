@@ -33,7 +33,6 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void takeView(MainContract.View view) {
         this.view = view;
-        getAllShows();
     }
 
     @Override

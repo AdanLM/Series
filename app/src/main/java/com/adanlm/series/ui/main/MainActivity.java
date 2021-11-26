@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,8 @@ import com.adanlm.series.R;
 import com.adanlm.series.data.model.Show;
 import com.adanlm.series.ui.adapters.ShowAdapter;
 import com.adanlm.series.ui.detailshow.DetailShowActivity;
+import com.adanlm.series.utils.CommonUtils;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -33,6 +36,7 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
     ShowAdapter adapter;
 
     private RecyclerView showRecycler;
+    private LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +45,19 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
 
         showRecycler = findViewById(R.id.show_list);
         showRecycler.setAdapter(adapter);
+        linearLayout = findViewById(R.id.linear_main);
+
         adapter.setListener(this);
         presenter.takeView(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!CommonUtils.isNetworkAvailable(this)) {
+            showSnackDontInternet();
+        }
+        presenter.getAllShows();
     }
 
     @Override
@@ -54,6 +69,14 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
     @Override
     public void showAllShows(List<Show> showsList) {
         adapter.updateData(showsList);
+    }
+
+    private void showSnackDontInternet() {
+        Snackbar snackbar = Snackbar.make(linearLayout, R.string.error_connection, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction("X", view -> {
+            snackbar.dismiss();
+        });
+        snackbar.show();
     }
 
     @Override
@@ -84,4 +107,6 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
         adapter.getFilter().filter(searchString);
         return false;
     }
+
+
 }
