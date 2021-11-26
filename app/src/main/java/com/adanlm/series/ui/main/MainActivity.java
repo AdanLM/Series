@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,7 @@ import com.adanlm.series.data.model.Show;
 import com.adanlm.series.ui.adapters.ShowAdapter;
 import com.adanlm.series.ui.detailshow.DetailShowActivity;
 import com.adanlm.series.utils.CommonUtils;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 
@@ -37,6 +40,8 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
 
     private RecyclerView showRecycler;
     private LinearLayout linearLayout;
+    private CircularProgressIndicator progressIndicator;
+    private TextView emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,8 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
         showRecycler = findViewById(R.id.show_list);
         showRecycler.setAdapter(adapter);
         linearLayout = findViewById(R.id.linear_main);
+        progressIndicator = findViewById(R.id.progress_shows);
+        emptyView = findViewById(R.id.empty_view_show);
 
         adapter.setListener(this);
         presenter.takeView(this);
@@ -68,7 +75,27 @@ public class MainActivity extends DaggerAppCompatActivity implements MainContrac
 
     @Override
     public void showAllShows(List<Show> showsList) {
+        emptyView.setVisibility(View.GONE);
+        showRecycler.setVisibility(View.VISIBLE);
         adapter.updateData(showsList);
+
+    }
+
+    @Override
+    public void showProgress() {
+        progressIndicator.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void hideProgress() {
+        progressIndicator.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showEmptyView() {
+        showRecycler.setVisibility(View.GONE);
+        emptyView.setVisibility(View.VISIBLE);
     }
 
     private void showSnackDontInternet() {

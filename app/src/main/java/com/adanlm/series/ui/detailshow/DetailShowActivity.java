@@ -2,6 +2,7 @@ package com.adanlm.series.ui.detailshow;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
@@ -16,6 +17,7 @@ import com.adanlm.series.ui.adapters.SeasonAdapter;
 import com.adanlm.series.ui.detailseason.DetailSeasonActivity;
 import com.adanlm.series.utils.CommonUtils;
 import com.bumptech.glide.RequestManager;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -44,6 +46,8 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
     private ImageView imgPreview;
     private RecyclerView recyclerView;
     private RelativeLayout linearLayout;
+    private CircularProgressIndicator progressIndicator;
+    private TextView emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,10 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
         imgPreview = findViewById(R.id.img_detail);
         recyclerView = findViewById(R.id.show_list_season);
         linearLayout = findViewById(R.id.linear_detail_show);
+
+        progressIndicator = findViewById(R.id.progress_detail_shows);
+        emptyView = findViewById(R.id.empty_view_detail_show);
+
         recyclerView.setAdapter(adapter);
         adapter.setListener(this);
 
@@ -102,6 +110,8 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
 
     @Override
     public void showSeasons(List<Season> seasons) {
+        emptyView.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
         adapter.updateData(seasons);
     }
 
@@ -124,5 +134,22 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void showProgress() {
+        progressIndicator.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void hideProgress() {
+        progressIndicator.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showEmptyView() {
+        recyclerView.setVisibility(View.GONE);
+        emptyView.setVisibility(View.VISIBLE);
     }
 }

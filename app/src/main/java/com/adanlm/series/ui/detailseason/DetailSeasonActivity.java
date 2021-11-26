@@ -1,7 +1,9 @@
 package com.adanlm.series.ui.detailseason;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +11,7 @@ import com.adanlm.series.R;
 import com.adanlm.series.data.model.Episode;
 import com.adanlm.series.ui.adapters.EpisodeAdapter;
 import com.adanlm.series.utils.CommonUtils;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -28,6 +31,8 @@ public class DetailSeasonActivity extends DaggerAppCompatActivity implements Det
     private RecyclerView recyclerView;
 
     private LinearLayout linearLayout;
+    private CircularProgressIndicator progressIndicator;
+    private TextView emptyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,8 @@ public class DetailSeasonActivity extends DaggerAppCompatActivity implements Det
         recyclerView.setAdapter(adapter);
 
         linearLayout = findViewById(R.id.linear_detail_season);
+        progressIndicator = findViewById(R.id.progress_season);
+        emptyView = findViewById(R.id.empty_view_season);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -62,6 +69,8 @@ public class DetailSeasonActivity extends DaggerAppCompatActivity implements Det
 
     @Override
     public void showEpisodes(List<Episode> episodeList) {
+        emptyView.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
         adapter.updateData(episodeList);
     }
 
@@ -82,5 +91,22 @@ public class DetailSeasonActivity extends DaggerAppCompatActivity implements Det
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    @Override
+    public void showProgress() {
+        progressIndicator.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void hideProgress() {
+        progressIndicator.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showEmptyView() {
+        recyclerView.setVisibility(View.GONE);
+        emptyView.setVisibility(View.VISIBLE);
     }
 }

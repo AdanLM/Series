@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_detail_show"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
-    android:id="@+id/linear_detail_show"
     tools:context=".ui.detailshow.DetailShowActivity">
 
     <ImageView
@@ -130,8 +130,29 @@
         android:layout_below="@id/lbl_list_seasons"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
-        tools:listitem="@layout/item_season"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_season" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_detail_shows"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_list_seasons"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/empty_view_detail_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_list_seasons"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="No hay informacion disponible"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

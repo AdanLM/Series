@@ -6,6 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".ui.detailseason.DetailSeasonActivity">
 
 
@@ -14,6 +16,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_episode" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progress_season"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminate="true" />
+
+    <TextView
+        android:id="@+id/empty_view_season"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No hay informacion disponible"
+        android:visibility="gone" />
 </LinearLayout>

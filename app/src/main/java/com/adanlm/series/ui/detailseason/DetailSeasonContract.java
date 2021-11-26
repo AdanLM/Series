@@ -8,7 +8,14 @@ public interface DetailSeasonContract {
 
     interface View {
         void showEpisodes(List<Episode> episodeList);
+
         void setTitleActivity(String title);
+
+        void showProgress();
+
+        void hideProgress();
+
+        void showEmptyView();
     }
 
     interface Presenter {

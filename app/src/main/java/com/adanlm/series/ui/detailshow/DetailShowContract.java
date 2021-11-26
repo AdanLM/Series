@@ -13,6 +13,12 @@ public interface DetailShowContract {
         void setTitleActivity(String title);
 
         void showSeasons(List<Season> seasons);
+
+        void showProgress();
+
+        void hideProgress();
+
+        void showEmptyView();
     }
 
     interface Presenter {
