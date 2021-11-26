@@ -77,7 +77,7 @@ public class DetailShowActivity extends DaggerAppCompatActivity implements Detai
         txtGenres.setText(CommonUtils.cleanBracketsText(show.getGenres().toString()));
         txtPremieredDate.setText(show.getPremiered());
         txtOfficialSite.setText(show.getOfficialSite());
-        txtRating.setText(String.valueOf(show.getRating()));
+        txtRating.setText(String.valueOf(show.getRating().getAverage()));
         rbarRating.setRating(show.getRating().getAverage());
         glide.load(show.getImage().getOriginal()).into(imgPreview);
     }

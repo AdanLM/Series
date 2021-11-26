@@ -1,8 +1,13 @@
 package com.adanlm.series.data.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "episodes")
 public class Episode {
 
     @SerializedName("name")
@@ -11,11 +16,13 @@ public class Episode {
 
     @SerializedName("season")
     @Expose
-    private String season;
+    @ColumnInfo(name = "idSeason")
+    private int season;
 
+    @PrimaryKey
     @SerializedName("number")
     @Expose
-    private String numEpisode;
+    private int numEpisode;
 
     @SerializedName("summary")
     @Expose
@@ -25,6 +32,14 @@ public class Episode {
     @Expose
     private Image image;
 
+    public Episode(String name, int season, int numEpisode, String summary, Image image) {
+        this.name = name;
+        this.season = season;
+        this.numEpisode = numEpisode;
+        this.summary = summary;
+        this.image = image;
+    }
+
     public String getName() {
         return name;
     }
@@ -33,19 +48,19 @@ public class Episode {
         this.name = name;
     }
 
-    public String getSeason() {
+    public int getSeason() {
         return season;
     }
 
-    public void setSeason(String season) {
+    public void setSeason(int season) {
         this.season = season;
     }
 
-    public String getNumEpisode() {
+    public int getNumEpisode() {
         return numEpisode;
     }
 
-    public void setNumEpisode(String numEpisode) {
+    public void setNumEpisode(int numEpisode) {
         this.numEpisode = numEpisode;
     }
 
@@ -57,11 +72,13 @@ public class Episode {
         this.summary = summary;
     }
 
-    public String getImage() {
-        return image.getMedium();
+    public Image getImage() {
+        return image;
     }
 
     public void setImage(Image image) {
         this.image = image;
     }
+
+
 }

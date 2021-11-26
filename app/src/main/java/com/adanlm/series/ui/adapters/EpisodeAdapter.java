@@ -41,9 +41,9 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.ViewHold
         Episode currentEpisode = episodeList.get(position);
 
         holder.getTxtName().setText(currentEpisode.getName());
-        holder.getTxtNumberEpisode().setText(currentEpisode.getNumEpisode());
+        holder.getTxtNumberEpisode().setText(String.valueOf(currentEpisode.getNumEpisode()));
         holder.getTxtSummary().setText(CommonUtils.cleanHTMLText(currentEpisode.getSummary()));
-        glide.load(currentEpisode.getImage()).into(holder.getImgEpisode());
+        glide.load(currentEpisode.getImage().getMedium()).into(holder.getImgEpisode());
     }
 
     @Override

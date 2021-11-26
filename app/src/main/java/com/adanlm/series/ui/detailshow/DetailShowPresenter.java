@@ -40,7 +40,6 @@ public class DetailShowPresenter implements DetailShowContract.Presenter {
     public void takeView(DetailShowContract.View view) {
         this.view = view;
         if (showDetail != null) {
-            Gson gson = new Gson();
             view.showDetailShow(showDetail);
             view.setTitleActivity(showDetail.getTitle());
             getAllSeasonsByShow();
@@ -62,6 +61,10 @@ public class DetailShowPresenter implements DetailShowContract.Presenter {
                     public void onSuccess(@NonNull List<Season> seasons) {
                         Log.d(TAG, "onSuccess: " + seasons.size());
                         view.showSeasons(seasons);
+                        for (Season season : seasons) {
+                            season.setIdShow(showDetail.getIdShow());
+                        }
+                        repository.insertAllSeason(seasons);
                     }
 
                     @Override

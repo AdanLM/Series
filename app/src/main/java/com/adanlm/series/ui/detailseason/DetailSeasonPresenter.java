@@ -58,7 +58,8 @@ public class DetailSeasonPresenter implements DetailSeasonContract.Presenter {
                     @Override
                     public void onSuccess(@NonNull List<Episode> episodeList) {
                         view.showEpisodes(episodeList);
-                        view.setTitleActivity("Temporada: " + idSeason);
+                        view.setTitleActivity("Temporada " + idSeason);
+                        repository.insertAllEpisodes(episodeList);
                     }
 
                     @Override

@@ -50,8 +50,8 @@ public abstract class AppModule {
     }
 
     @Provides
-    static ShowsRepository provideRepository(EndPoints endPoints, ControlDataBase db) {
-        return new ShowsRepository(endPoints, db);
+    static ShowsRepository provideRepository(EndPoints endPoints, ControlDataBase db, Context context) {
+        return new ShowsRepository(endPoints, db, context);
     }
 
     @Singleton
